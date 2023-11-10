@@ -1,0 +1,20 @@
+[constants]
+vcpkg_base_path = '/opt/vcpkg/'
+vcpkg_installed_dir = vcpkg_base_path + 'installed/x64-linux/'
+vcpkg_toolchain_file = vcpkg_base_path + 'scripts/toolchains/linux.cmake'
+
+[properties]
+cmake_toolchain_file = vcpkg_base_path + 'scripts/buildsystems/vcpkg.cmake'
+
+[binaries]
+vcpkg = [ vcpkg_base_path + 'vcpkg']
+pkgconfig = [ vcpkg_installed_dir + 'tools/pkgconf/pkgconf']
+
+[cmake]
+VCPKG_CHAINLOAD_TOOLCHAIN_FILE = vcpkg_toolchain_file
+VCPKG_INSTALLED_DIR = vcpkg_installed_dir
+VCPKG_CRT_LINKAGE = 'dynamic'
+
+[built-in options]
+pkg_config_path = [ vcpkg_installed_dir + 'lib/pkgconfig:' + vcpkg_installed_dir + 'lib64/pkgconfig']
+cmake_prefix_path = [ vcpkg_installed_dir ]

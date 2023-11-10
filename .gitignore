@@ -1,0 +1,9 @@
+.cache
+temp
+build
+a.out
+*.so
+__pycache__
+*.egg-info
+dist
+*.csv

@@ -1,0 +1,42 @@
+---
+# See all possible options and defaults with:
+# clang-format --style=llvm --dump-config
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+# AlignAfterOpenBracket: Align
+# AlignConsecutiveMacros: AcrossComments
+# AlignConsecutiveAssignments: AcrossComments
+# AlignConsecutiveDeclarations: AcrossComments
+# AlignEscapedNewlines: Right
+# AlignOperands: true
+# AlignTrailingComments: true
+AllowShortLambdasOnASingleLine: true
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: All
+BreakConstructorInitializers: BeforeColon
+ColumnLimit: 80
+CommentPragmas: 'NOLINT:.*|^ IWYU pragma:'
+IncludeBlocks: Regroup
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+Language: Cpp
+SpaceAfterCStyleCast: true
+Standard: Cpp11
+StatementMacros: ['PyObject_HEAD']
+TabWidth: 4
+IncludeCategories:
+  - Regex:           '^".*/?detail/'
+    Priority:        1
+    SortPriority:    2
+  - Regex:           '^"'
+    Priority:        1
+    SortPriority:    3
+  - Regex:           '<[[:alnum:]._]+>'
+    Priority:        4
+  - Regex:           '.*'
+    Priority:        5
+...
+
