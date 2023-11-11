@@ -13,8 +13,6 @@
 struct Client {
     int fd;           // client socket fd
     std::string name; // client name
-
-    ~Client() { fmt::println("~Client()"); }
 };
 
 class ChatServer {
