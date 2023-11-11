@@ -1,5 +1,6 @@
 source_files = files(
   'socket.cpp',
+  'server.cpp',
 )
 
 lib = library('smallchat',

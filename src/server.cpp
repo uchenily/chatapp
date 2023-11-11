@@ -23,9 +23,9 @@ int create_tcp_server(int port) {
 
 int accept_client(int server_socket) {
     int s{};
-    socklen_t len{};
+    struct sockaddr_in sa;
+    socklen_t len{sizeof(sa)};
     while (true) {
-        struct sockaddr_in sa;
         s = accept(server_socket, (struct sockaddr *) &sa, &len);
         if (s == -1) {
             if (errno == EINTR) {

@@ -4,7 +4,7 @@ int set_nonblock(int fd) {
     int yes = 1;
 
     int flags = fcntl(fd, F_GETFL);
-    if ((flags) == -1) {
+    if (flags == -1) {
         return -1;
     }
     if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) == -1) {
