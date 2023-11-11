@@ -5,6 +5,10 @@
 
 #include <sys/select.h>
 
+// 实现的功能:
+// 1. 接受新的连接
+// 2. 检查是否有client给我们发消息
+// 3. 发送广播消息
 int main() {
     ChatServer chat;
     while (true) {
@@ -55,6 +59,7 @@ int main() {
                 if (FD_ISSET(i, &readfds)) {
                     ssize_t nread = read(i, readbuf, sizeof(readbuf) - 1);
                     // 消息长度<=0, 说明这个client断开了
+                    // -1: Error, 0: short read => socket已经close了
                     if (nread <= 0) {
                         fmt::println("Disconnected client fd={} name={}",
                                      i,
