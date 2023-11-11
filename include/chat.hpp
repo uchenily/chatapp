@@ -18,9 +18,11 @@ struct Client {
 };
 
 class ChatServer {
+    static int max_clients;
+
 public:
-    ChatServer() : listen_sock{create_tcp_server(SERVER_PORT)} {
-        assert(listen_sock != -1);
+    ChatServer() : listen_fd{create_tcp_server(SERVER_PORT)} {
+        assert(listen_fd != -1);
         // 支持的最大fd是1024
         clients.resize(1024);
     }
@@ -31,8 +33,11 @@ public:
     void remove_client(int fd);
     void send_all(std::string message, int excluded);
 
-private:
-    int listen_sock = -1;
+public:
+    // 保存最大的fd
+    int max_clientfd = -1;
+
+    int listen_fd = -1;
     int num_clients = 0;
     // 索引就是fd
     std::vector<std::unique_ptr<Client>> clients;
