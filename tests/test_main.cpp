@@ -68,6 +68,38 @@ int main() {
                     } else {
                         // 普通chat消息
                         readbuf[nread] = 0;
+
+                        // 如果readbuf是一个命令, 则执行命令:
+                        if (readbuf[0] == '/') {
+                            // 移除空白字符
+                            char *p = nullptr;
+                            p = strchr(readbuf, '\r');
+                            if (p) {
+                                *p = 0;
+                            }
+                            p = strchr(readbuf, '\n');
+                            if (p) {
+                                *p = 0;
+                            }
+
+                            // 检查命令的参数
+                            char *arg = strchr(readbuf, ' ');
+                            if (arg) {
+                                *arg = 0; /* Terminate command name. */
+                                arg++; /* Argument is 1 byte after the space. */
+                            }
+
+                            if ((strcmp(readbuf, "/nick") == 0) && arg) {
+                                chat.clients[i]->name = arg;
+                            } else {
+                                // Unsupported command. Send an error.
+                                write(chat.clients[i]->fd,
+                                      "Unsupported command\n",
+                                      20);
+                            }
+                            continue;
+                        }
+
                         auto boardcast_msg = fmt::format("{}> {}",
                                                          chat.clients[i]->name,
                                                          std::string(readbuf));
