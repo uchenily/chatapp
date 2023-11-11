@@ -26,19 +26,10 @@ public:
     }
 
 public:
-    int accept() const { return accept_client(listen_sock); }
+    int accept() const;
     void create_client(int fd);
     void remove_client(int fd);
-
-    void send_all(std::string message, int excluded) {
-        for (auto &client : clients) {
-            if (client == nullptr || client->fd == excluded) {
-                continue;
-            }
-
-            write(client->fd, message.data(), message.size());
-        }
-    }
+    void send_all(std::string message, int excluded);
 
 private:
     int listen_sock = -1;

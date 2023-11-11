@@ -1,12 +1,16 @@
 #include "server.hpp"
 
+#include <asm-generic/socket.h>
+
 int create_tcp_server(int port) {
+    int yes = 1;
     struct sockaddr_in sa {};
 
     int s = socket(AF_INET, SOCK_STREAM, 0);
     if (s == -1) {
         return -1;
     }
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
 
     sa.sin_family = AF_INET;
     sa.sin_port = htons(port);
